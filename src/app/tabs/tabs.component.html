@@ -1,0 +1,7 @@
+<ul>
+	<li *ngFor="let panel of panels" (click)="selectPanel(panel)" [ngClass]="{ 'active' : panel.active, 'unsaved' : panel.unsaved }"
+	 class="unsaved">{{ panel.title }}</li>
+	<ng-content select="ngx-action"></ng-content>
+</ul>
+
+<ng-content select="ngx-panel"></ng-content>

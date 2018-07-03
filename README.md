@@ -1,27 +1,101 @@
-# AngularXTabs
+## DEMO
+[View on stackblitz](https://stackblitz.com/github/alain21218/angular-x-tabs)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+## Install
+```sh
+npm install angular-x-tabs
+```
 
-## Development server
+## Usage
+```ts
+import { TabsModule } from 'angular-4-tabs';
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+//...
 
-## Code scaffolding
+@NgModule({
+  imports:      [
+      BrowserModule,
+      FormsModule,
+      TabsModule // <---- HERE
+  ],
+  declarations: [ AppComponent ],
+  bootstrap:    [ AppComponent ]
+})
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Example
 
-## Build
+> HTML
+```html
+<h1>Vertical</h1>
+<ngx-tabs actionLabel="create" class="vertical">
+	<ngx-panel *ngFor="let d of data" [title]="d.title" [unsaved]="d.unsaved">
+		<p>{{ d.content }}</p>
+	</ngx-panel>
+</ngx-tabs>
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+<h2>Horizontal</h2>
+<h3>With Action Button</h3>
+<ngx-tabs>
+  <ngx-action (click)="addData($event)">Add</ngx-action>
+  <ngx-action (click)="saveData($event)">Save All</ngx-action>
+	<ngx-panel *ngFor="let d of data" [title]="d.title" [unsaved]="d.unsaved">
+		<p>{{ d.content }}</p>
+	</ngx-panel>
+</ngx-tabs>
 
-## Running unit tests
+<h3>Without Action Button</h3>
+<ngx-tabs>
+	<ngx-panel *ngFor="let d of data" [title]="d.title" [unsaved]="d.unsaved">
+    <textarea [(ngModel)]="d.content" (input)="d.unsaved = true"></textarea>
+  </ngx-panel>
+</ngx-tabs>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
 
-## Running end-to-end tests
+> TS
+```ts
+    public data = [
+    {
+      title: Math.random(),
+      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      unsaved: false
+    },
+    {
+      title: Math.random().toFixed(3),
+      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      unsaved: false
+    },
+    {
+      title: Math.random().toFixed(3),
+      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      unsaved: false
+    }
+  ];
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+  public addData() {
+    this.data.push({
+      title: 'new item',
+      content: 'content',
+      unsaved: true
+    });
+  }
 
-## Further help
+  public saveData() {
+    alert('Saved !');
+  }
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## API
+
+### ACTION
+
+### TABS
+
+### PANEL
+
+- [title] : Text used for the tab title
+- [unsaved] : Boolean used to show a star after the title
+
+
+

@@ -1,0 +1,105 @@
+$main: #337ab7;
+$contrast: white;
+$corner: 15px;
+
+%element {
+  display: inline-block;
+  list-style: none;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 16px;
+  padding: 0px 0px;
+  line-height: 35px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+::ng-deep ngx-action {
+  @extend %element;
+
+  color: $main - 60;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 0 20px;
+  letter-spacing: 1px;
+
+  &:hover {
+    background: transparent;
+    text-decoration: underline;
+  }
+}
+
+li {
+  @extend %element;
+
+  flex: 1;
+  background: $main;
+  color: $contrast;
+
+  border-radius: $corner $corner 0 0;
+
+  &.unsaved::after {
+    content: "*";
+  }
+
+  &.active {
+    background: $main - 35;
+
+    &:hover {
+      cursor: auto;
+    }
+  }
+
+  &:not(.active):hover {
+    background: $main - 20;
+  }
+
+  &:not(.active):active {
+    background: $main - 35;
+    cursor: pointer;
+  }
+}
+
+
+
+
+:host(.vertical) {
+  display: flex;
+  flex-direction: row;
+
+  ul {
+    flex-direction: column;
+    background: coral;
+  }
+
+  li {
+    max-width: 150px;
+    border-radius: 0px;
+    padding: 5px 15px;
+    
+    + li {
+      border-top: 1px solid $main - 30;
+    }
+  }
+
+  ::ng-deep ngx-action {
+    text-align: center;
+    padding: 0 10px;
+    font-size: 15px;
+  }
+
+  ::ng-deep .content {
+    height: 100%;
+    width: 100%;
+  }
+}
